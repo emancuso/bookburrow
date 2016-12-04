@@ -50,7 +50,8 @@ public class User {
     }
     
     public void reviewBook(Book book, Review review) {
-        //access the DBAbstraction somehow? Go through process?
+        DBAbstraction db = new DBAbstraction();
+        db.addReivew(review);
     }
     
     
