@@ -5,6 +5,8 @@
  */
 package wombats;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author krejci
@@ -36,7 +38,7 @@ public class Process {
     public boolean valid(String s) {
         if (s == null) return false;
         if (s.length() > 20 || s.length() < 3) return false;
-        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
         char[] string = s.toCharArray();
         for (int i = 0; i < string.length; i++) {
             if (!yes.contains(String.valueOf(string[i]))) return false;
@@ -48,6 +50,11 @@ public class Process {
         if (u == null) return false;
         DBAbstraction db = new DBAbstraction();
         return db.validU(u);
+    }
+    
+    public ArrayList<Book> renderBooks(String query) {
+        DBAbstraction db = new DBAbstraction();
+        return db.renderBooks(String query);
     }
 
     /**
