@@ -45,6 +45,10 @@ public class User {
         this.password = password;
     }
     
+    public void setFavorites(ArrayList<Book> faveList) {
+        this.favorites = faveList;
+    }
+    
     public void addFavorite(Book favorite) {
         favorites.add(favorite);
     }
@@ -54,5 +58,12 @@ public class User {
         db.addReivew(review);
     }
     
+    public User renderUser() {
+        DbAbstraction db = new DBAbstraction();
+        User updated = db.renderUser(username);
+        this.setType(updated.getType());
+        this.setFavorites(updated.getFavorites());
+        return this;
+    }
     
 }
