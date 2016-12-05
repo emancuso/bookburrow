@@ -17,6 +17,11 @@ public class Book {
     private String genre;
     private ArrayList<Review> reviews;
     
+    public Book(String title, String author, String reviews) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+    }    
     
     public String getTitle() {
         return title;

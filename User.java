@@ -12,13 +12,22 @@ import java.util.ArrayList;
  * @author riley
  */
 public class User {
-    private String type;
+    private boolean admin;
     private String username;
     private String password;
     private ArrayList<Book> favorites;
     
-    public String getType() {
-        return type;
+    public User(String username, String password, boolean admin, ArrayList<Book> favorites) {
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+        if (favorites != null) {
+            this.favorites = favorites;
+        }
+    }
+    
+    public boolean getAdmin() {
+        return admin;
     }
 
     public String getUsername() {
@@ -33,8 +42,8 @@ public class User {
         return favorites;
     }
     
-    public void setType(String type) {
-        this.type = type;
+    public void setAdmin(Boolean status) {
+        this.admin = status;
     }
 
     public void setUsername(String username) {
@@ -55,13 +64,13 @@ public class User {
     
     public void reviewBook(Book book, Review review) {
         DBAbstraction db = new DBAbstraction();
-        db.addReivew(review);
+        db.addReview(review);
     }
     
     public User renderUser() {
-        DbAbstraction db = new DBAbstraction();
+        DBAbstraction db = new DBAbstraction();
         User updated = db.renderUser(username);
-        this.setType(updated.getType());
+        this.setAdmin(updated.getAdmin());
         this.setFavorites(updated.getFavorites());
         return this;
     }

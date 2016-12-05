@@ -14,6 +14,12 @@ public class Review {
     private int rating;
     private String content;
     private int bookId;
+    
+    public Review(int rating, String content, int bookId) {
+        this.rating = rating;
+        this.content = content;
+        this.bookId = bookId;
+    }
 
     public int getRating() {
         return rating;

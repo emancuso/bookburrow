@@ -5,11 +5,18 @@
  */
 package wombats;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author riley
  */
-public class Admin extends User{
+public class Admin extends User {
+    
+    public Admin(String username, String password, ArrayList<Book> favorites) {
+        super(username, password, true, favorites);
+    }
+    
     DBAbstraction db = new DBAbstraction();
     
     public void deleteBook(Book b) {
@@ -17,7 +24,7 @@ public class Admin extends User{
     }
    
     public void deleteUser(User u) {
-       db.deleteUser(u);
+       db.deleteUser(u.getUsername());
     }
     
     public void deleteReview(Review r) {
