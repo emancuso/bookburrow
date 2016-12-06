@@ -24,11 +24,6 @@ public class DBAbstraction {
     private String dbUrl = "jdbc:derby://localhost:1527/bookburrow";
     private Connection conn;
     
-    public static void main(String[] args) {
-        DBAbstraction db = new DBAbstraction();
-        System.out.println(db.searchBooks("book"));
-    }
-    
     public DBAbstraction() {
         try {
             this.conn = getConnection();
@@ -222,5 +217,38 @@ public class DBAbstraction {
         String query = "DELETE FROM favorites WHERE username='" + user.getUsername() + 
                 "' AND book_id='" + bookId + "'";
         runQuery(query, true);
+    }
+    
+    public boolean loginValid(String username, String password) {
+        String query = "SELECT * FROM users WHERE username='" + username + 
+                "' AND password='" + password + "'";
+        ResultSet rs = runQuery(query, false);
+        boolean valid = true;
+        
+        try {
+            if (!rs.next()) {
+                valid = false;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return valid;
+    }
+    
+    public boolean usernameAvailable(String username) {
+        String query = "SELECT * FROM users WHERE username='" + username + "'";
+        boolean available = false;
+        ResultSet rs = runQuery(query, false);
+        
+        try {
+            if (!rs.next()) {
+                available = true;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return available;
     }
 }
