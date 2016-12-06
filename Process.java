@@ -30,12 +30,12 @@ public class Process {
         return db.userCheck(u.toLowerCase(), p);
     }
     
-    public void create(String u, String p) {
+    public void createUser(String u, String p, boolean admin) {
         DBAbstraction db = new DBAbstraction();
-        db.create(u,p);
+        db.createUser(u,p,admin);
     }
     
-    public boolean valid(String s) {
+    public boolean validString(String s, boolean username) {
         if (s == null) return false;
         if (s.length() > 20 || s.length() < 3) return false;
         String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
@@ -43,18 +43,16 @@ public class Process {
         for (int i = 0; i < string.length; i++) {
             if (!yes.contains(String.valueOf(string[i]))) return false;
         }
+        if (username) {
+            DBAbstraction db = new DBAbstraction();
+            return db.validUsername(u);
+        }
         return true;
     }
     
-    public boolean validU(String u) {
-        if (u == null) return false;
+    public ArrayList<Book> renderFavorites(String username) {
         DBAbstraction db = new DBAbstraction();
-        return db.validU(u);
-    }
-    
-    public ArrayList<Book> renderBooks(String query) {
-        DBAbstraction db = new DBAbstraction();
-        return db.renderBooks(String query);
+        return db.renderFavorites(username);
     }
 
     /**
@@ -140,3 +138,4 @@ public class Process {
     public void setRating(int rating) {
         this.rating = rating;
     }
+}
