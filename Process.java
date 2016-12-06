@@ -38,7 +38,7 @@ public class Process {
     public boolean validString(String s, boolean username) {
         if (s == null) return false;
         if (s.length() > 20 || s.length() < 3) return false;
-        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=";
         char[] string = s.toCharArray();
         for (int i = 0; i < string.length; i++) {
             if (!yes.contains(String.valueOf(string[i]))) return false;
