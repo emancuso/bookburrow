@@ -27,7 +27,7 @@ public class Process {
     public boolean checkLogin(String u, String p) {
         DBAbstraction db = new DBAbstraction();
         if (u == null || p == null) return false;
-        return db.userCheck(u.toLowerCase(), p);
+        return db.loginValid(u.toLowerCase(), p);
     }
     
     public void createUser(String u, String p, boolean admin) {
@@ -38,14 +38,14 @@ public class Process {
     public boolean validString(String s, boolean username) {
         if (s == null) return false;
         if (s.length() > 20 || s.length() < 3) return false;
-        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=";
+        String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=";
         char[] string = s.toCharArray();
         for (int i = 0; i < string.length; i++) {
             if (!yes.contains(String.valueOf(string[i]))) return false;
         }
         if (username) {
             DBAbstraction db = new DBAbstraction();
-            return db.validUsername(u);
+            return db.usernameAvailable(s);
         }
         return true;
     }
