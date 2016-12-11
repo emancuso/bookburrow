@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Book Burrow</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+            
+        <div id="container">
+            <div id="login">
+                <button>Login</button>
+                <button>Register</button>
+            </div>
+            <div id="banner">
+                <img src="bookburrowlogo.png"/>
+            </div>
+            <div id="search">
+                <input type="text" name="search" placeholder="Search..">
+            </div>
+            <div id="content">
+                <div id="recommendations">
+                    <div id="leftarrow"><img src="button-left.png" onclick="leftArrow()"/></div>
+                    <div id="rec_images">
+                        <img id="book0" name="book0" class="book" src="books/book9.jpg"/>
+                        <img id="book1" name="book1" class="book" src="books/book8.jpg"/>
+                        <img id="book2" name="book2" class="book" src="books/book7.jpg"/>
+                        <img id="book3" name="book3" class="book" src="books/book6.jpg"/>
+                    </div>
+                    <div id="rightarrow"><img src="button-right.png"/></div>
+                </div> 
+            </div>
+        </div>
+        
+        
+        <script>
+    var books = {
+    "book0": {"id":0, "url":"books/book0.jpg", "name":"Book Name"}, 
+    "book1": {"id":1, "url":"books/book1.jpg", "name":"Book Name"}, 
+    "book2": {"id":2, "url":"books/book2.jpg", "name":"Book Name"},
+    "book3": {"id":3, "url":"books/book3.png", "name":"Book Name"},
+    "book4": {"id":4, "url":"books/book4.jpg", "name":"Book Name"},
+    "book5": {"id":5, "url":"books/book5.jpg", "name":"Book Name"},
+    "book6": {"id":6, "url":"books/book6.jpg", "name":"Book Name"},
+    "book7": {"id":7, "url":"books/book7.jpg", "name":"Book Name"},
+    "book8": {"id":8, "url":"books/book8.jpg", "name":"Book Name"},
+    "book9": {"id":9, "url":"books/book9.jpg", "name":"Book Name"},
+    };
+    //alert();
+    document.getElementById("book0").src = books["book0"].url;
+    document.getElementById("book0").name = "book0";
+    document.getElementById("book1").src = books["book1"].url;
+    document.getElementById("book1").name = "book1";
+    document.getElementById("book2").src = books["book2"].url;
+    document.getElementById("book2").name = "book2";
+    document.getElementById("book3").src = books["book3"].url;
+    document.getElementById("book3").name = "book3";
+    
+    function updateActiveBooks(b0, b1, b2, b3){
+        document.getElementById("book0").src = books[b0].url;
+        document.getElementById("book0").name = b0;
+        document.getElementById("book1").src = books[b1].url;
+        document.getElementById("book1").name = b1;
+        document.getElementById("book2").src = books[b2].url;
+        document.getElementById("book2").name = b2;
+        document.getElementById("book3").src = books[b3].url;
+        document.getElementById("book3").name = b3;
+    }
+    
+    function getActiveBook(){
+        var currBookName = document.getElementById("book0").name;
+        var currBookNumber = Number(currBookName.slice(4));
+        
+        return books[currBookName];
+    }
+    
+    function leftArrow(){
+        var currBookName0 = document.getElementById("book0").name;
+        var currBookNumber0 = Number(currBookName0.slice(4));
+        var currBookName1 = document.getElementById("book1").name;
+        var currBookNumber1 = Number(currBookName1.slice(4));
+        var currBookName2 = document.getElementById("book2").name;
+        var currBookNumber2 = Number(currBookName2.slice(4));
+        var currBookName3 = document.getElementById("book3").name;
+        var currBookNumber3 = Number(currBookName3.slice(4));
+        
+        var bookNumbers = [ currBookNumber0, currBookNumber1, currBookNumber2, currBookNumber3];
+        
+        var bookArrayLength = Object.keys(books).length;
+        var newNumbers = [];
+        for (i=0; i < bookNumbers.length; i++){
+            if (bookNumbers[i] + 2 > bookArrayLength) {
+                newNumbers.push(0);
+            }
+            else {
+                newNumbers.push(bookNumbers[i] + 1);
+            }
+        }
+
+        var newBook0 = "book" + newNumbers[0];
+        var newBook1 = "book" + newNumbers[1];
+        var newBook2 = "book" + newNumbers[2];
+        var newBook3 = "book" + newNumbers[3];
+        updateActiveBooks(newBook0, newBook1, newBook2, newBook3);
+    }
+    
+    function rightArrow(currentBook){
+        alert("hi");
+    }
+    
+    
+    </script>
+    </body>
+</html>
