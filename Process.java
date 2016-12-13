@@ -1,47 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wombats;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author krejci
+ * 
+ * @authors krejci. riley mancuso
  */
 public class Process {
-    
-    private String newusername;
-    private String newpassword;
-    private String newpassconfirm;
-    private String submit;
-    private String review;
-    private int rating;
-    
+
+    String username;
+    String password;
+    String passConfirm;
+    String submit;
+    String review;
+    int rating;
+    boolean admin = false;
+
     public Process() {
         submit = "x";
     }
-    
-    public boolean checkLogin(String u, String p) {
+
+    public boolean checkLogin() {
         DBAbstraction db = new DBAbstraction();
-        if (u == null || p == null) return false;
-        return db.loginValid(u.toLowerCase(), p);
+        if (username == null || password == null) return false;
+        return db.loginValid(username.toLowerCase(), password);
     }
-    
-    public void createUser(String u, String p, boolean admin) {
+
+
+    public void createUser() {
         DBAbstraction db = new DBAbstraction();
-        db.createUser(u,p,admin);
+        db.createUser(username, password, admin);
     }
-    
+
     public boolean validString(String s, boolean username) {
-        if (s == null) return false;
-        if (s.length() > 20 || s.length() < 3) return false;
+        if (s == null) {
+            return false;
+        }
+        if (s.length() > 20 || s.length() < 3) {
+            return false;
+        }
         String yes = "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=";
         char[] string = s.toCharArray();
         for (int i = 0; i < string.length; i++) {
-            if (!yes.contains(String.valueOf(string[i]))) return false;
+            if (!yes.contains(String.valueOf(string[i]))) {
+                return false;
+            }
         }
         if (username) {
             DBAbstraction db = new DBAbstraction();
@@ -49,52 +52,52 @@ public class Process {
         }
         return true;
     }
-    
+
     public ArrayList<Book> renderFavorites(String username) {
         DBAbstraction db = new DBAbstraction();
         return db.renderFavorites(username);
     }
 
     /**
-     * @return the newusername
+     * @return the username
      */
-    public String getNewusername() {
-        return newusername;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param newusername the newusername to set
+     * @param newusername the username to set
      */
-    public void setNewusername(String newusername) {
-        this.newusername = newusername;
+    public void setUsername(String newusername) {
+        this.username = newusername;
     }
 
     /**
-     * @return the newpassword
+     * @return the password
      */
-    public String getNewpassword() {
-        return newpassword;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param newpassword the newpassword to set
+     * @param newpassword the password to set
      */
-    public void setNewpassword(String newpassword) {
-        this.newpassword = newpassword;
+    public void setPassword(String newpassword) {
+        this.password = newpassword;
     }
 
     /**
-     * @return the newpassconfirm
+     * @return the passConfirm
      */
-    public String getNewpassconfirm() {
-        return newpassconfirm;
+    public String getPassConfirm() {
+        return passConfirm;
     }
 
     /**
-     * @param newpassconfirm the newpassconfirm to set
+     * @param passConfirm the passConfirm to set
      */
-    public void setNewpassconfirm(String newpassconfirm) {
-        this.newpassconfirm = newpassconfirm;
+    public void setPassConfirm(String passConfirm) {
+        this.passConfirm = passConfirm;
     }
 
     /**
