@@ -33,7 +33,7 @@ and open the template in the editor.
                         <img id="book2" name="book2" class="book" src="books/book7.jpg"/>
                         <img id="book3" name="book3" class="book" src="books/book6.jpg"/>
                     </div>
-                    <div id="rightarrow"><img src="button-right.png"/></div>
+                    <div id="rightarrow"><img src="button-right.png" onclick="rightArrow()"/></div>
                 </div> 
             </div>
         </div>
@@ -80,7 +80,8 @@ and open the template in the editor.
         return books[currBookName];
     }
     
-    function leftArrow(){
+    function getCurrentActiveBooks(){
+        
         var currBookName0 = document.getElementById("book0").name;
         var currBookNumber0 = Number(currBookName0.slice(4));
         var currBookName1 = document.getElementById("book1").name;
@@ -88,10 +89,15 @@ and open the template in the editor.
         var currBookName2 = document.getElementById("book2").name;
         var currBookNumber2 = Number(currBookName2.slice(4));
         var currBookName3 = document.getElementById("book3").name;
-        var currBookNumber3 = Number(currBookName3.slice(4));
+        var currBookNumber3 = Number(currBookName3.slice(4)); 
         
         var bookNumbers = [ currBookNumber0, currBookNumber1, currBookNumber2, currBookNumber3];
-        
+        return bookNumbers;
+    }
+    
+    function leftArrow(){
+        var bookNumbers = getCurrentActiveBooks();
+        console.log(bookNumbers);
         var bookArrayLength = Object.keys(books).length;
         var newNumbers = [];
         for (i=0; i < bookNumbers.length; i++){
@@ -110,8 +116,25 @@ and open the template in the editor.
         updateActiveBooks(newBook0, newBook1, newBook2, newBook3);
     }
     
-    function rightArrow(currentBook){
-        alert("hi");
+    function rightArrow(){
+        var bookNumbers = getCurrentActiveBooks();
+        
+        var bookArrayLength = Object.keys(books).length;
+        var newNumbers = [];
+        for (i=0; i < bookNumbers.length; i++){
+            if (bookNumbers[i] - 1 <= -1) {
+                newNumbers.push(bookArrayLength-1);
+            }
+            else {
+                newNumbers.push(bookNumbers[i] - 1);
+            }
+        }
+
+        var newBook0 = "book" + newNumbers[0];
+        var newBook1 = "book" + newNumbers[1];
+        var newBook2 = "book" + newNumbers[2];
+        var newBook3 = "book" + newNumbers[3];
+        updateActiveBooks(newBook0, newBook1, newBook2, newBook3);
     }
     
     
