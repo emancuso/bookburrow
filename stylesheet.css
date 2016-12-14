@@ -3,10 +3,6 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
-    Created on : Dec 7, 2016, 8:16:33 PM
-    Author     : Sharon V
-*/
 
 body, html {
     padding:0;
@@ -24,11 +20,12 @@ body, html {
 #banner {
     height:33%;
     width:100%;
-    background:#E1E1E1;
+    background:#F1F1F1;
 }
 
 #banner img{
     max-height:100%;
+    padding-left:5%;
 }
 
 #login {
@@ -36,7 +33,7 @@ body, html {
     text-align:right;
     height:50px;
     width:100%;
-    background:#D0D0D0;
+    background:#F1F1F1;
 }
 
 #search {
@@ -110,7 +107,6 @@ input[type=text]:focus {
     width:80px;
     display:block;
 }
-
 
 
 
