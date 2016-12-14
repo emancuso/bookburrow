@@ -3,7 +3,7 @@ package wombats;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @authors krejci. riley mancuso
  */
 public class Process {
@@ -13,23 +13,34 @@ public class Process {
     String passConfirm;
     String submit;
     String review;
+    String key;
     int rating;
     boolean admin = false;
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+    
     public Process() {
         submit = "x";
     }
 
     public boolean checkLogin() {
         DBAbstraction db = new DBAbstraction();
-        if (username == null || password == null) return false;
-        return db.loginValid(username.toLowerCase(), password);
+        return db.loginValid(username, password);
     }
 
-
-    public void createUser() {
+    public boolean createUser() {
         DBAbstraction db = new DBAbstraction();
+        if (checkLogin()) {
+            return false;
+        }
         db.createUser(username, password, admin);
+        return true;
     }
 
     public boolean validString(String s, boolean username) {
@@ -51,6 +62,11 @@ public class Process {
             return db.usernameAvailable(s);
         }
         return true;
+    }
+
+    public ArrayList<Book> searchBooks() {
+        DBAbstraction db = new DBAbstraction();
+        return db.searchBooks(key);
     }
 
     public ArrayList<Book> renderFavorites(String username) {
@@ -141,4 +157,5 @@ public class Process {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
 }
