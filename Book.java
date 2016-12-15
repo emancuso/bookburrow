@@ -17,10 +17,12 @@ public class Book {
     private String genre;
     private ArrayList<Review> reviews;
     
-    public Book(String title, String author, String reviews) {
+    public Book(String title, String author, String genre) {
+        DBAbstraction db = new DBAbstraction();
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.reviews = db.renderReviews(this);
     }    
     
     public String getTitle() {
