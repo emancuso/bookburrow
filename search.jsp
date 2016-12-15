@@ -22,9 +22,8 @@
             //out.print(searchControl.getKey());
             ArrayList<Book> resultList = searchControl.searchBooks();
             for (Book book : resultList) {
-                out.print("Title: " + book.getTitle() + "<br>");
-                out.print("Author: " + book.getAuthor() + "<br>");
-                out.print("Genre: " + book.getGenre() + "<br>");
+                out.print("<p><a href='book.jsp?key=" + book.getTitle() + "'>" + book.getTitle() + "</a><br>");
+                out.print(book.getAuthor() + "</p>");
             }
             %>
         </div>
