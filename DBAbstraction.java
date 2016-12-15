@@ -63,21 +63,21 @@ public class DBAbstraction {
     
     private int getBookId(Book book) {
         int id = 1;
-        String retrieveBook = "SELECT * IN books WHERE title='" + book.getTitle() + 
+        String retrieveBook = "SELECT * from books WHERE title='" + book.getTitle() + 
                 "' AND author='" + book.getAuthor() + "' AND genre='" + book.getGenre() + "'";
+        System.out.println(retrieveBook);
         ResultSet rs = runQuery(retrieveBook, false);
         try {
             id = rs.getInt("id");
         } catch(SQLException e) {
             e.printStackTrace();
         }
-        
         return id;
     }
     
     private int getReviewId(Review review) {
         int id = 1;
-        String retrieveReview = "SELECT * IN reviews WHERE book_id='" + review.getBookId() + 
+        String retrieveReview = "SELECT * from reviews WHERE book_id='" + review.getBookId() + 
                 "' AND rating='" + review.getRating() + "' AND review='" + 
                 review.getContent() + "'";
         ResultSet rs = runQuery(retrieveReview, false);
@@ -114,7 +114,7 @@ public class DBAbstraction {
     public ArrayList<Review> renderReviews(Book book) {
         ArrayList<Review> reviews = new ArrayList<>();
         int bookId = getBookId(book);
-        String getReviews = "SELECT * IN reviews WHERE book_id='" + bookId + "'";
+        String getReviews = "SELECT * from reviews WHERE book_id=" + bookId;
         ResultSet rs = runQuery(getReviews, false);
         
         try {
