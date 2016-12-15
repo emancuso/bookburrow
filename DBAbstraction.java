@@ -65,7 +65,6 @@ public class DBAbstraction {
         int id = 1;
         String retrieveBook = "SELECT * from books WHERE title='" + book.getTitle() + 
                 "' AND author='" + book.getAuthor() + "' AND genre='" + book.getGenre() + "'";
-        System.out.println(retrieveBook);
         ResultSet rs = runQuery(retrieveBook, false);
         try {
             id = rs.getInt("id");
@@ -114,13 +113,14 @@ public class DBAbstraction {
     public ArrayList<Review> renderReviews(Book book) {
         ArrayList<Review> reviews = new ArrayList<>();
         int bookId = getBookId(book);
+        System.out.println(bookId);
         String getReviews = "SELECT * from reviews WHERE book_id=" + bookId;
         ResultSet rs = runQuery(getReviews, false);
         
         try {
             while(rs.next()) {
                 int rating = rs.getInt("rating");
-                String content = rs.getString("review");
+                String content = rs.getString("content");
                 reviews.add(new Review(rating, content, bookId));
             }
         } catch(SQLException e) {
@@ -128,6 +128,12 @@ public class DBAbstraction {
         }
         
         return reviews;
+    }
+    
+    public static void main(String[] args) {
+        Book book = new Book("Diary of a Wombat","Jackie French", "Childrens");
+        DBAbstraction db = new DBAbstraction();
+        System.out.println(db.getBookId(book));
     }
     
     public ArrayList<Book> renderFavorites(String username) {
