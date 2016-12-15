@@ -18,12 +18,16 @@ public class Book {
     private ArrayList<Review> reviews;
     
     public Book(String title, String author, String genre) {
-        DBAbstraction db = new DBAbstraction();
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.reviews = db.renderReviews(this);
-    }    
+        this.reviews = renderReviews();
+    }
+    
+    private ArrayList<Review> renderReviews() {
+        DBAbstraction db = new DBAbstraction();
+        return db.renderReviews(this);
+    }
     
     public String getTitle() {
         return title;
